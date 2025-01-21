@@ -79,9 +79,12 @@ func updateStudent(c *gin.Context) {
 			students[i].Name = studentUpdate.Name
 			students[i].Age = studentUpdate.Age
 			students[i].ID = studentUpdate.ID
+			c.IndentedJSON(http.StatusOK, studentUpdate)
+			return
 		}
 	}
-	c.IndentedJSON(http.StatusOK, studentUpdate)
+	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "student not found"})
+
 }
 
 func deleteStudent(c *gin.Context) {
